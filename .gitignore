@@ -5,6 +5,7 @@ __pycache__/
 
 # VS Code Files
 *.code-workspace
+launch.json
 
 # C extensions
 *.so
