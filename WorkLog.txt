@@ -8,3 +8,6 @@
 -panicked upon realizing i hadn't added anything yet
 -did part of create_table function
 
+2022-04-13
+-i think i finished the create_table function, but now i feel overwhelmed from overthinking it
+-did some other work
