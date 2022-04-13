@@ -1,5 +1,10 @@
 
 2022-03-27
 -stared at project
--though about what to do
+-thought about what to do
 -idk
+
+2022-04-12
+-panicked upon realizing i hadn't added anything yet
+-did part of create_table function
+
