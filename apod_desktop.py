@@ -165,9 +165,8 @@ def create_image_db(db_path):
     apodTable = """ CREATE TABLE IF NOT EXISTS apod_images (
             date text
     ) VALUES (?);"""
-    apodDate = apod_date # TODO
     
-    myCursor.execute(apodTable, apodDate) 
+    myCursor.execute(apodTable) 
 
 def add_image_to_db(db_path, image_path, image_size, image_sha256):
     """
