@@ -21,6 +21,7 @@ from datetime import datetime, date
 from hashlib import sha256
 from os import path
 import sqlite3
+import requests
 
 def main():
 
@@ -117,7 +118,14 @@ def get_apod_info(date):
     :param date: APOD date formatted as YYYY-MM-DD
     :returns: Dictionary of APOD info
     """    
-    return {"todo" : "TODO"}
+    print('Getting info...')
+    URL = 'https://api.nasa.gov/planetary/apod/'
+    response = requests.get(URL + str(date))
+
+    if response.status_code == 200:
+        print ('success!')
+    else:
+        print ('failed. Error code', response.status_code)
 
 def print_apod_info(image_url, image_path, image_size, image_sha256):
     """
@@ -162,11 +170,16 @@ def create_image_db(db_path):
     myConnection = sqlite3.connect(db_path)
     myCursor = myConnection.cursor()
 
-    apodTable = """ CREATE TABLE IF NOT EXISTS apod_images (
+    apodTable = """CREATE TABLE IF NOT EXISTS apod_images (
             date text
-    ) VALUES (?);"""
+    );"""
+    addApodDate = """INSERT INTO apod_images (
+        date
+        ) VALUES (?);"""
     
-    myCursor.execute(apodTable) 
+    myCursor.execute(apodTable, addApodDate)
+    #myCursor.commit()
+    #myCursor.close()
 
 def add_image_to_db(db_path, image_path, image_size, image_sha256):
     """
