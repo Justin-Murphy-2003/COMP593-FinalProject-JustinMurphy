@@ -15,6 +15,8 @@ Parameters:
 History:
   Date        Author    Description
   2022-03-11  J.Dalby   Initial creation
+  2022-03-27  J.Murphy  Started work
+  2022-04-27  J.Murphy  Completion (and hopefully perfection)
 """
 from sys import argv, exit
 from datetime import datetime, date
@@ -118,12 +120,19 @@ def get_apod_info(date):
     :param date: APOD date formatted as YYYY-MM-DD
     :returns: Dictionary of APOD info
     """    
-    print('Getting info...')
-    URL = 'https://api.nasa.gov/planetary/apod/'
-    response = requests.get(URL + str(date))
+    URL = "https://api.nasa.gov/planetary/apod"
+    api_key = "5V5z2c322vMg4bcKiiIZrMPkPWMCKqxHRNcRqngO"
+    params = {
+      'api_key':api_key,
+      'date':date,
+      'thumbs':'True'
+    }
+    URL = 'https://api.nasa.gov/planetary/apod'
+    response = requests.get(URL, params=params)
 
     if response.status_code == 200:
         print ('success!')
+        return(params)
     else:
         print ('failed. Error code', response.status_code)
 
@@ -173,11 +182,8 @@ def create_image_db(db_path):
     apodTable = """CREATE TABLE IF NOT EXISTS apod_images (
             date text
     );"""
-    addApodDate = """INSERT INTO apod_images (
-        date
-        ) VALUES (?);"""
     
-    myCursor.execute(apodTable, addApodDate)
+    myCursor.execute(apodTable)
     #myCursor.commit()
     #myCursor.close()
 
