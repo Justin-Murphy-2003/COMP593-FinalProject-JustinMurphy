@@ -11,3 +11,12 @@
 2022-04-13
 -i think i finished the create_table function, but now i feel overwhelmed from overthinking it
 -did some other work
+
+2022-04-14
+-had bruh moment
+-understood universe
+-finished create_table function AND get_apod_info function
+-i think this was a productive day
+
+2022-04-15
+-get_apod_info works now
