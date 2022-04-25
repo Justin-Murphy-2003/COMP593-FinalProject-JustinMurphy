@@ -155,7 +155,16 @@ def download_apod_image(image_url):
     :param image_url: URL of image
     :returns: Response message that contains image data
     """
-    return "TODO"
+    print('Downloading image from URL...')
+    response = requests.get(image_url)
+
+    if response.status_code == 200:
+        print("success!")
+        image_data = response.content
+        with open(image_url, 'wb') as file:
+                file.write(image_data)
+    else:
+        print("failed. Response code", response.status_code)
 
 def save_image_file(image_msg, image_path):
     """
