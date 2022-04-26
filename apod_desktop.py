@@ -148,7 +148,7 @@ def print_apod_info(image_url, image_path, image_size, image_sha256):
     """    
     return #TODO
 
-def download_apod_image(image_url, image_dir_path):
+def download_apod_image(image_url):
     """
     Downloads an image from a specified URL.
 
@@ -160,9 +160,9 @@ def download_apod_image(image_url, image_dir_path):
 
     if response.status_code == 200:
         print("success!")
-        image_data = response.content
-        with open(image_dir_path, 'wb') as file:
-                file.write(image_data)
+        img_data = response.content
+        with open('image_name.jpg', 'wb') as handler:
+            handler.write(img_data)
     else:
         print("failed. Response code", response.status_code)
 
