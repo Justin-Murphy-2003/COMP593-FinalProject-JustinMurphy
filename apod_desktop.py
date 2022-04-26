@@ -42,8 +42,8 @@ def main():
     
     # Download today's APOD
     image_url = 'https://apod.nasa.gov/apod/astropix.html'
-    image_msg = download_apod_image(image_url, image_dir_path)
-    image_sha256 = "TODO"
+    image_msg = download_apod_image(image_url)
+    image_sha256 = sha256(image_msg)
     image_size = -1 # TODO
     image_path = get_image_path(image_url, image_dir_path)
 
@@ -160,11 +160,10 @@ def download_apod_image(image_url):
 
     if response.status_code == 200:
         print("success!")
-        img_data = response.content
-        with open('image_name.jpg', 'wb') as handler:
-            handler.write(img_data)
+        return response.content
     else:
         print("failed. Response code", response.status_code)
+        return
 
 def save_image_file(image_msg, image_path):
     """
