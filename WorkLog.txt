@@ -23,4 +23,5 @@
 -it didn't work before
 
 2022-04-25
--finished download_apod_image
+-started download_apod_image
+-idk how to do download_apod_image
