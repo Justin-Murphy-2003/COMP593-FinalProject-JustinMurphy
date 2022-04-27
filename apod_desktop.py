@@ -202,7 +202,10 @@ def create_image_db(db_path):
     myCursor = myConnection.cursor()
 
     apodTable = """CREATE TABLE IF NOT EXISTS apod_images (
-            date text
+            date text NOT NULL,
+            size integer NOT NULL,
+            sha256 text NOT NULL,
+            downloaded_at datetime NOT NULL
     );"""
     
     myCursor.execute(apodTable)
@@ -234,9 +237,13 @@ def image_already_in_db(db_path, image_sha256):
     myCursor = myConnection.cursor()
 
     selectStatement = """SELECT date FROM apod_images
-    WHERE date = """
+    WHERE sha256 = image_sha256"""
 
     myCursor.execute(selectStatement)
+    if selectStatement:
+        return True
+    else:
+        return False
 
 def set_desktop_background_image(image_path):
     """
