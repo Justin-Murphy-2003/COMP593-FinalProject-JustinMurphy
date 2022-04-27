@@ -18,6 +18,7 @@ History:
   2022-03-27  J.Murphy  Started work
   2022-04-27  J.Murphy  Completion (and hopefully perfection)
 """
+from select import select
 from sys import argv, exit
 from datetime import datetime, date
 from hashlib import sha256
@@ -44,7 +45,7 @@ def main():
     image_url = 'https://apod.nasa.gov/apod/astropix.html'
     image_msg = download_apod_image(image_url)
     image_sha256 = sha256(image_msg)
-    image_size = 1
+    image_size = len(image_msg)
     image_path = get_image_path(image_url, image_dir_path)
 
     # Print APOD image information
@@ -110,21 +111,15 @@ def get_image_path(image_url, dir_path):
     :param dir_path: Path of directory in which image is saved locally
     :returns: Path at which image is saved locally
     """
-    response = requests.get(image_url)
     
-    img_dir = path.join(dir_path, "images")
+    image_link = image_url.split('/')[-1]
+
+    img_dir = path.join(dir_path, image_link)
     if not path.isdir(img_dir):
         mkdir(img_dir)
+    
+    return img_dir
 
-    if response.status_code == 200:
-        print("success!")
-        image_data = response.content
-        with open(img_dir, 'wb') as file:
-                file.write(image_data)
-        return dir_path
-    else:
-        print("failed. Response code", response.status_code)
-        return
 
 
 def get_apod_info(date):
@@ -161,7 +156,11 @@ def print_apod_info(image_url, image_path, image_size, image_sha256):
     :param image_sha256: SHA-256 of image
     :returns: None
     """    
-    return #TODO
+    print("Saved from:", image_url)
+    print("Saved at:", image_path)
+    print("Size:", image_size, "bytes")
+    print("SHA-256:", image_sha256)
+    return
 
 def download_apod_image(image_url):
     """
@@ -231,7 +230,13 @@ def image_already_in_db(db_path, image_sha256):
     :param image_sha256: SHA-256 of image
     :returns: True if image is already in DB; False otherwise
     """ 
-    return True #TODO
+    myConnection = sqlite3.connect(db_path)
+    myCursor = myConnection.cursor()
+
+    selectStatement = """SELECT date FROM apod_images
+    WHERE date = """
+
+    myCursor.execute(selectStatement)
 
 def set_desktop_background_image(image_path):
     """
