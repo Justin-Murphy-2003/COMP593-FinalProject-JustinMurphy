@@ -25,3 +25,8 @@
 2022-04-25
 -started download_apod_image
 -idk how to do download_apod_image
+
+2022-04-26
+-i think download_apod_image works now
+-tried doing get_image_path
+-coding is hard sometimes
