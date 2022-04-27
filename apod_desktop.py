@@ -21,7 +21,7 @@ History:
 from sys import argv, exit
 from datetime import datetime, date
 from hashlib import sha256
-from os import path
+from os import path, mkdir
 import sqlite3
 import requests
 
@@ -44,7 +44,7 @@ def main():
     image_url = 'https://apod.nasa.gov/apod/astropix.html'
     image_msg = download_apod_image(image_url)
     image_sha256 = sha256(image_msg)
-    image_size = -1 # TODO
+    image_size = 1
     image_path = get_image_path(image_url, image_dir_path)
 
     # Print APOD image information
@@ -110,7 +110,22 @@ def get_image_path(image_url, dir_path):
     :param dir_path: Path of directory in which image is saved locally
     :returns: Path at which image is saved locally
     """
-    return "TODO"
+    response = requests.get(image_url)
+    
+    img_dir = path.join(dir_path, "images")
+    if not path.isdir(img_dir):
+        mkdir(img_dir)
+
+    if response.status_code == 200:
+        print("success!")
+        image_data = response.content
+        with open(img_dir, 'wb') as file:
+                file.write(image_data)
+        return dir_path
+    else:
+        print("failed. Response code", response.status_code)
+        return
+
 
 def get_apod_info(date):
     """
