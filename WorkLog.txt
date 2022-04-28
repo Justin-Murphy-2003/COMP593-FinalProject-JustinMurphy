@@ -6,16 +6,16 @@
 
 2022-04-12
 -panicked upon realizing i hadn't added anything yet
--did part of create_table function
+-did part of create_image_db function
 
 2022-04-13
--i think i finished the create_table function, but now i feel overwhelmed from overthinking it
+-i think i finished the create_image_db function, but now i feel overwhelmed from overthinking it
 -did some other work
 
 2022-04-14
 -got a better understanding of things
 -felt like i understood universe
--finished create_table function AND get_apod_info function
+-finished create_image_db function AND get_apod_info function
 -i think this was a productive day
 
 2022-04-15
@@ -39,3 +39,6 @@
 -found image_size using len(), like a boss
 -also did print_apod_info, like a boss
 -fixed create_image_db so it has the appropriate number of columns
+
+2022-04-28
+-after lots of panic and chaos, script almost done
