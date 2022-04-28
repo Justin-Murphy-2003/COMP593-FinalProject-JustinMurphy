@@ -44,7 +44,7 @@ def main():
     # Download today's APOD
     image_url = 'https://apod.nasa.gov/apod/astropix.html'
     image_msg = download_apod_image(image_url)
-    image_sha256 = sha256(image_msg)
+    image_sha256 = sha256(image_msg).hexdigest()
     image_size = len(image_msg)
     image_path = get_image_path(image_url, image_dir_path)
 
@@ -236,8 +236,7 @@ def image_already_in_db(db_path, image_sha256):
     myConnection = sqlite3.connect(db_path)
     myCursor = myConnection.cursor()
 
-    selectStatement = """SELECT date FROM apod_images
-    WHERE sha256 = image_sha256"""
+    selectStatement = ("SELECT date FROM apod_images WHERE sha256=?;", [image_sha256])
 
     myCursor.execute(selectStatement)
     if selectStatement:

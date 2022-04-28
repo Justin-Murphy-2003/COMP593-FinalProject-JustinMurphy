@@ -38,3 +38,4 @@
 -did image_sha256 previously, just realized i still need to find image_size
 -found image_size using len(), like a boss
 -also did print_apod_info, like a boss
+-fixed create_image_db so it has the appropriate number of columns
