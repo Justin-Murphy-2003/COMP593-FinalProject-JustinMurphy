@@ -49,3 +49,8 @@
 -after asking about some problems, image_already_in_db, save_image_file, and add_image_to_db work as well
 -set_desktop_image_background works too, which i figured out on my own (it was very easy)
 -the script, after a freaking heck of a lot of testing, works
+
+2022-04-29
+-just to be absolutely sure it works, i ran the script again
+-it does in fact work
+-i know testing probably means nothing grade-wise, but it never hurts to be 100% sure that a script works right
