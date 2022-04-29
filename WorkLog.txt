@@ -34,7 +34,7 @@
 2022-04-27
 -got an answer about a question i had for get-image-path
 -thanks Jeremy
--get-image-path works now
+-get_image_path works now
 -did image_sha256 previously, just realized i still need to find image_size
 -found image_size using len(), like a boss
 -also did print_apod_info, like a boss
@@ -42,3 +42,10 @@
 
 2022-04-28
 -after lots of panic and chaos, script almost done
+-once again, thanks Jeremy, i wouldn't've figured out the reason my variables looked wrong if it weren't for your support as instructor of COMP 593
+-fixed image_url so it returns a link to the image instead of to the site itself as it did previously (i thought something looked weird)
+-image_size makes sense now that image_url
+-image_sha256 properly returns the actual SHA-256 value and not whatever it returned previously
+-after asking about some problems, image_already_in_db, save_image_file, and add_image_to_db work as well
+-set_desktop_image_background works too, which i figured out on my own (it was very easy)
+-the script, after a freaking heck of a lot of testing, works
