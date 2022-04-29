@@ -25,6 +25,7 @@ from hashlib import sha256
 from os import path, mkdir
 import sqlite3
 import requests
+import ctypes
 
 def main():
 
@@ -185,7 +186,8 @@ def save_image_file(image_msg, image_path):
     :param image_path: Path to save image file
     :returns: None
     """
-    return #TODO
+    with open(image_path, 'wb') as file:
+        file.write(image_msg)
 
 def create_image_db(db_path):
     """
@@ -220,7 +222,23 @@ def add_image_to_db(db_path, image_path, image_size, image_sha256):
     :param image_sha256: SHA-256 of image
     :returns: None
     """
-    return #TODO
+    myConnection = sqlite3.connect(db_path)
+    myCursor = myConnection.cursor()
+
+    imageQuery = """INSERT INTO apod_images (path, 
+                    size, 
+                    sha256, 
+                    downloaded_at) 
+                    VALUES (?, ?, ?, ?)"""
+
+    apodImageData = (image_path, 
+                    image_size, 
+                    image_sha256, 
+                    datetime.now())
+    
+    myCursor.execute(imageQuery, apodImageData)
+    myConnection.commit()
+    myConnection.close()
 
 def image_already_in_db(db_path, image_sha256):
     """
@@ -248,6 +266,6 @@ def set_desktop_background_image(image_path):
     :param image_path: Path of image file
     :returns: None
     """
-    return #TODO
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 0)
 
 main()
